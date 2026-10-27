@@ -70,16 +70,20 @@
 
 #continerOptions div {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     text-align: center;
     align-items: center;
 }
 
 #continerOptions img {
     margin-left: 20px;
-    background-color: aqua;
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
+}
+
+#continerOptions span {
+    font-size: 14px;
+    font-weight: 450;
 }
 
 #QuickActions {
@@ -100,7 +104,7 @@
     height: 180px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 28px;
 }
 
 #actionsContiner div {
@@ -112,7 +116,18 @@
 
 #actionsContiner img {
     margin-left: 20px;
-    background-color: aqua;
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
+}
+
+#actionsContiner {
+    font-size: 15px;
+
+}
+
+#leftPanelImg img {
+    height: 150px;
+    width: 250px;
+    margin-top: 10px;
+    border-radius: 15px;
 }
