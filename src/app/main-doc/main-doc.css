@@ -1,0 +1,907 @@
+/* ─── Main page container ────────────────────────────────────────────────── */
+#mainpage {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-sizing: border-box;
+    width: 1000px;
+    min-height: 100vh;
+    position: absolute;
+    top: 80px;
+    left: 210px;
+    padding: 16px 16px 40px;
+}
+
+/* ─── Title banner ───────────────────────────────────────────────────────── */
+#title {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0 18px;
+    text-align: center;
+    border-radius: 16px;
+    background:
+        radial-gradient(circle at 0% 50%, rgba(139,92,246,.18) 0%, transparent 45%),
+        radial-gradient(circle at 100% 50%, rgba(99,102,241,.15) 0%, transparent 45%),
+        radial-gradient(circle at 50% 100%, rgba(236,72,153,.1) 0%, transparent 50%),
+        var(--bg-card);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    color: var(--text-secondary);
+    transition: background 0.3s ease;
+}
+
+#title h6 {
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+#title h1 {
+    color: var(--text-primary);
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+#title p {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* ─── Color Generator ────────────────────────────────────────────────────── */
+#colorGenrator {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    min-height: 200px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+#colorbox {
+    border-radius: 12px;
+    flex-shrink: 0;
+    height: 160px;
+    width: 160px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.color-spectrum {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    transition: background-color 0.35s ease;
+}
+
+#colorcode {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#codeOpt {
+    display: flex;
+    gap: 4px;
+}
+
+#codeOpt button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 6px;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+#codeOpt button:hover {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+#codeOpt button.active {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+#codeOpt button hr {
+    margin-top: 3px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent);
+    border: none;
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+#codeOpt button.active hr {
+    opacity: 1;
+}
+
+#IPtextBox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+#IPtextBox input {
+    padding-left: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border-focus);
+    height: 44px;
+    flex: 1;
+    min-width: 0;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.2s ease;
+    box-sizing: border-box;
+}
+
+#IPtextBox input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(99,102,241,.12);
+}
+
+#IPtextBox button {
+    border: none;
+    background: var(--accent-light);
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+#IPtextBox button:hover {
+    background: var(--accent);
+}
+
+#IPtextBox button:hover img {
+    filter: brightness(10);
+}
+
+#IPtextBox img {
+    height: 18px;
+    width: 18px;
+}
+
+.copy-feedback {
+    min-height: 16px;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+    padding-left: 4px;
+    transition: opacity 0.2s ease;
+}
+
+#colorChoose {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.color-circle {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid var(--bg-card);
+    outline: 1px solid var(--border);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 0;
+}
+
+.color-circle:hover {
+    transform: scale(1.2);
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+
+/* ─── Coloropt side column ────────────────────────────────────────────────── */
+#colorOpt {
+    width: 170px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    box-sizing: border-box;
+}
+
+/* ─── Shared button styles ────────────────────────────────────────────────── */
+.icon-button,
+.tool-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.icon-button svg,
+.tool-button svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.tool-button:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.ai-button svg {
+    color: #8B5CF6;
+}
+
+.ai-button:hover svg {
+    color: var(--accent);
+}
+
+.save-palette-btn:hover {
+    border-color: #10B981;
+    color: #10B981;
+    background: rgba(16,185,129,.08);
+}
+
+/* ─── Palette section ────────────────────────────────────────────────────── */
+#colorpalette {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
+    box-sizing: border-box;
+    padding: 18px 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+#colorOne {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+#colorpaletteOne {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#colorpaletteOne h4 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+#colorpaletteOne p {
+    color: var(--text-secondary);
+    font-size: 13px;
+}
+
+#colorpaletteTwo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+/* Palette type selector pills */
+#paletteTypeSelector {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.type-btn {
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.type-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-light);
+}
+
+.type-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
+}
+
+.palette-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+#colorTwo {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.palette-color {
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+}
+
+.color-box {
+    display: block;
+    width: 100%;
+    height: 90px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    padding: 0;
+}
+
+.color-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0,0,0,.15);
+}
+
+.lock-button {
+    display: block;
+    margin: -24px 6px 4px auto;
+    border: 1px solid var(--border);
+    background: var(--lock-bg);
+    border-radius: 6px;
+    padding: 3px 5px;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.lock-button:hover {
+    border-color: var(--accent);
+    background: var(--accent-light);
+}
+
+.lock-button.locked {
+    background: var(--accent-light);
+    border-color: var(--accent);
+}
+
+.hex {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 4px 0;
+    transition: color 0.2s ease;
+    font-family: 'Courier New', monospace;
+}
+
+.hex:hover {
+    color: var(--accent);
+}
+
+/* ─── Saved Palettes (home preview) ──────────────────────────────────────── */
+#savedPalettes {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
+    box-sizing: border-box;
+    padding: 18px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.saved-section {
+    width: 100%;
+}
+
+.saved-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.saved-header h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.saved-header p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.view-all-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--text-secondary);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 5px 12px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.view-all-btn:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.view-all-btn span {
+    display: inline-block;
+    transition: transform 0.25s ease;
+}
+
+.view-all-btn:hover span {
+    transform: translateX(3px);
+}
+
+.saved-palettes {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.saved-card {
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg-card-hover);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.saved-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 6px 18px rgba(99,102,241,.1);
+}
+
+.saved-colors {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.saved-colors span {
+    flex: 1;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.saved-colors span:hover {
+    transform: scaleY(1.15);
+}
+
+.saved-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+.palette-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.card-action-btn {
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: color 0.2s ease, background 0.2s ease;
+    font-family: inherit;
+}
+
+.card-action-btn:hover {
+    color: var(--accent);
+    background: var(--accent-light);
+}
+
+.card-action-btn.danger:hover {
+    color: #ef4444;
+    background: rgba(239,68,68,.08);
+}
+
+.empty-state {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    padding: 24px 0;
+}
+
+/* ─── Section views (Palettes / Favorites / Settings) ────────────────────── */
+.section-view {
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section-header {
+    padding: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow-card);
+    transition: background 0.3s ease;
+}
+
+.section-header h2 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.section-header p {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* ─── Palettes section full view ─────────────────────────────────────────── */
+.palette-type-full {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.palette-preview-large {
+    display: flex;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 260px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+}
+
+.palette-large-card {
+    flex: 1;
+    position: relative;
+    cursor: pointer;
+    transition: flex 0.3s ease;
+}
+
+.palette-large-card:hover {
+    flex: 1.6;
+}
+
+.palette-large-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(to top, rgba(0,0,0,.3), transparent);
+}
+
+.palette-large-hex {
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.5px;
+}
+
+.palette-large-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.palette-inline-btn {
+    border: 1px solid rgba(255,255,255,.4);
+    background: rgba(255,255,255,.15);
+    border-radius: 6px;
+    padding: 3px 7px;
+    font-size: 13px;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+    font-family: inherit;
+    transition: background 0.2s ease;
+}
+
+.palette-inline-btn:hover {
+    background: rgba(255,255,255,.3);
+}
+
+.palette-section-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* ─── Favorites grid ──────────────────────────────────────────────────────── */
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.fav-card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--bg-card);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.fav-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 20px rgba(99,102,241,.12);
+}
+
+.fav-colors {
+    display: flex;
+    height: 80px;
+}
+
+.fav-swatch {
+    flex: 1;
+    cursor: pointer;
+    transition: flex 0.25s ease;
+}
+
+.fav-swatch:hover {
+    flex: 1.8;
+}
+
+.fav-card-body {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.fav-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.fav-hexes {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.fav-hex-chip {
+    font-size: 10px;
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: var(--accent-light);
+    padding: 3px 7px;
+    border-radius: 4px;
+}
+
+.fav-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.fav-load-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.fav-delete-btn:hover {
+    border-color: #ef4444;
+    color: #ef4444;
+    background: rgba(239,68,68,.08);
+}
+
+.empty-favorites {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+}
+
+.empty-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    opacity: 0.4;
+}
+
+.empty-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+/* ─── Settings section ────────────────────────────────────────────────────── */
+.settings-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-shadow: var(--shadow-card);
+    transition: background 0.3s ease;
+}
+
+.settings-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.settings-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 120px;
+    padding-top: 6px;
+}
+
+.settings-options {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.setting-opt-btn {
+    padding: 7px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-card-hover);
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.setting-opt-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.setting-opt-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
+}
+
+.settings-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 4px 0;
+}
+
+.reset-btn {
+    align-self: flex-start;
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.reset-btn:hover {
+    background: rgba(239,68,68,.08);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 1280px) {
+    #mainpage {
+        width: calc(100vw - 230px);
+    }
+}
+
+@media (max-width: 900px) {
+    .saved-palettes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .saved-palettes {
+        grid-template-columns: 1fr;
+    }
+    .favorites-grid {
+        grid-template-columns: 1fr;
+    }
+    #colorGenrator {
+        flex-direction: column;
+    }
+    #colorbox {
+        width: 100%;
+    }
+    #colorOpt {
+        flex-direction: row;
+        width: 100%;
+    }
+}

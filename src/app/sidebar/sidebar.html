@@ -1,0 +1,48 @@
+<aside>
+    <div id="sidebar">
+        <div id="one">
+            <button
+                type="button"
+                class="menu"
+                [class.active]="isActive('home')"
+                (click)="navigate('home')"
+                aria-label="Home">
+                <img src="home.png" alt="">
+                <span>{{ t()['nav_home'] }}</span>
+            </button>
+
+            <button
+                type="button"
+                class="menu"
+                [class.active]="isActive('palettes')"
+                (click)="navigate('palettes')"
+                aria-label="Palettes">
+                <img src="paint-palette.png" alt="">
+                <span>{{ t()['nav_palettes'] }}</span>
+            </button>
+
+            <button
+                type="button"
+                class="menu"
+                [class.active]="isActive('favorites')"
+                (click)="navigate('favorites')"
+                aria-label="Favorites">
+                <img src="heart.png" alt="">
+                <span>{{ t()['nav_favorites'] }}</span>
+            </button>
+
+            <button
+                type="button"
+                class="menu"
+                [class.active]="isActive('settings')"
+                (click)="navigate('settings')"
+                aria-label="Settings">
+                <img src="settings.png" alt="">
+                <span>{{ t()['nav_settings'] }}</span>
+            </button>
+        </div>
+        <div id="two">
+            <p>Better colours <br> Better ideas.</p>
+        </div>
+    </div>
+</aside>

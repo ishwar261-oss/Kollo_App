@@ -1,0 +1,430 @@
+<div id="mainpage">
+
+    <!-- ════════════════ HOME SECTION ════════════════ -->
+    @if (activeSection() === 'home') {
+
+    <!-- Title banner -->
+    <div id="title">
+        <h6>{{ t()['welcome_to'] }}</h6>
+        <h1>Kollo</h1>
+        <p>{{ t()['app_tagline'] }}</p>
+    </div>
+
+    <!-- ── Color Generator ── -->
+    <div id="colorGenrator">
+        <div id="colorbox">
+            <div class="color-spectrum" [style.background-color]="currentColor()"></div>
+        </div>
+
+        <div id="colorcode">
+            <!-- Format tabs -->
+            <div id="codeOpt">
+                @for (format of formats; track format) {
+                <button type="button"
+                    (click)="setFormat(format)"
+                    [class.active]="selectedFormat() === format"
+                    [attr.aria-pressed]="selectedFormat() === format">
+                    {{ format }}
+                    <hr />
+                </button>
+                }
+            </div>
+
+            <!-- Value input + copy -->
+            <div id="IPtextBox">
+                <input type="text"
+                    [value]="currentColorValue()"
+                    readonly
+                    aria-label="Current color value" />
+
+                <button type="button"
+                    (click)="copyCurrentColor()"
+                    aria-label="Copy current color value"
+                    title="Copy color">
+                    <img src="copy.png" alt="copy" />
+                </button>
+            </div>
+
+            <!-- Copied feedback -->
+            <p class="copy-feedback" aria-live="polite">{{ copiedMessage() }}</p>
+
+            <!-- Palette color circles -->
+            <div id="colorChoose">
+                @for (color of palette(); track $index) {
+                <button type="button"
+                    class="color-circle"
+                    [style.background-color]="color.hex"
+                    [attr.aria-label]="'Select color ' + color.hex"
+                    [title]="color.hex"
+                    (click)="selectColor(color.hex)">
+                </button>
+                }
+            </div>
+        </div>
+
+        <!-- Action buttons column -->
+        <div id="colorOpt">
+            <button style="background-color: #8B5CF6; color: white;"
+                id="copyBtn"
+                class="icon-button"
+                (click)="copyCurrentColor()"
+                aria-label="Copy color"
+                [title]="t()['copy']">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="8" y="8" width="13" height="13" rx="2" />
+                    <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" />
+                </svg>
+                {{ t()['copy'] }}
+            </button>
+
+            <button type="button" class="tool-button" (click)="randomColor()"
+                [title]="t()['random_color']">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 3h5v5" />
+                    <path d="M4 20 21 3" />
+                    <path d="M21 16v5h-5" />
+                    <path d="m15 15 6 6" />
+                    <path d="M4 4l5 5" />
+                </svg>
+                {{ t()['random_color'] }}
+            </button>
+        </div>
+    </div>
+
+    <!-- ── Palette Generator ── -->
+    <div id="colorpalette">
+        <div id="colorOne">
+            <div id="colorpaletteOne">
+                <h4>{{ t()['palette_title'] }}</h4>
+                <p>{{ t()['palette_subtitle'] }}</p>
+            </div>
+            <div id="colorpaletteTwo">
+                <!-- Palette type selector -->
+                <div id="paletteTypeSelector">
+                    @for (pt of paletteTypes; track pt.value) {
+                    <button type="button"
+                        class="type-btn"
+                        [class.active]="paletteType() === pt.value"
+                        (click)="setPaletteType(pt.value)"
+                        [title]="t()[pt.labelKey]">
+                        {{ t()[pt.labelKey] }}
+                    </button>
+                    }
+                </div>
+
+                <div class="palette-actions">
+                    <button class="tool-button ai-button" (click)="generatePalette()"
+                        [title]="t()['generate_palette']">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3a9 9 0 1 0 0 18h1.5a2.5 2.5 0 0 0 1.7-4.3
+                     1.5 1.5 0 0 1 1.1-2.7H18a3 3 0 0 0 3-3
+                     8 8 0 0 0-9-8Z" />
+                            <circle cx="7.5" cy="10" r="1" />
+                            <circle cx="10" cy="6.5" r="1" />
+                            <circle cx="15" cy="7" r="1" />
+                            <path d="m19 2 .7 2.3L22 5l-2.3.7L19 8l-.7-2.3L16 5l2.3-.7L19 2Z" />
+                        </svg>
+                        {{ t()['generate_palette'] }}
+                    </button>
+
+                    <button class="tool-button save-palette-btn" (click)="savePalette()"
+                        [title]="t()['save_palette']">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                            <polyline points="17 21 17 13 7 13 7 21" />
+                            <polyline points="7 3 7 8 15 8" />
+                        </svg>
+                        {{ t()['save_palette'] }}
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="colorTwo">
+            @for (color of palette(); track $index; let i = $index) {
+            <div class="palette-color">
+                <button type="button" class="color-box"
+                    [style.background-color]="color.hex"
+                    [attr.aria-label]="'Select ' + color.hex"
+                    [title]="'Select ' + color.hex"
+                    (click)="selectColor(color.hex)">
+                </button>
+
+                <button type="button" class="lock-button"
+                    [class.locked]="color.locked"
+                    [attr.aria-label]="color.locked ? t()['unlock'] : t()['lock']"
+                    [title]="color.locked ? t()['unlock'] : t()['lock']"
+                    (click)="toggleLock(i)">
+                    {{ color.locked ? '🔒' : '🔓' }}
+                </button>
+
+                <button type="button" class="hex"
+                    (click)="copyColor(color.hex)"
+                    [title]="'Copy ' + color.hex">
+                    {{ color.hex }}
+                </button>
+            </div>
+            }
+        </div>
+    </div>
+
+    <!-- ── Saved Palettes (Home preview) ── -->
+    <div id="savedPalettes">
+        <div class="saved-section">
+            <div class="saved-header">
+                <div>
+                    <h3>{{ t()['saved_palettes'] }}</h3>
+                    <p>{{ t()['saved_palettes_desc'] }}</p>
+                </div>
+                <button type="button" class="view-all-btn" (click)="viewFavorites()">
+                    {{ t()['view_all'] }} <span>→</span>
+                </button>
+            </div>
+
+            @if (savedPalettes().length === 0) {
+            <p class="empty-state">{{ t()['no_saved_palettes'] }}</p>
+            } @else {
+            <div class="saved-palettes">
+                @for (saved of savedPalettes().slice(0, 4); track saved.id) {
+                <div class="saved-card">
+                    <div class="saved-colors">
+                        @for (hex of saved.colors; track $index) {
+                        <span [style.background]="hex" [title]="hex"></span>
+                        }
+                    </div>
+                    <div class="saved-card-footer">
+                        <span class="palette-name">{{ saved.name }}</span>
+                        <div class="card-actions">
+                            <button type="button"
+                                class="card-action-btn"
+                                (click)="restorePalette(saved)"
+                                [title]="t()['restore']">↩</button>
+                            <button type="button"
+                                class="card-action-btn danger"
+                                (click)="removeSaved(saved.id)"
+                                [title]="t()['delete']">✕</button>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+            }
+        </div>
+    </div>
+
+    }
+
+    <!-- ════════════════ PALETTES SECTION ════════════════ -->
+    @if (activeSection() === 'palettes') {
+    <div class="section-view">
+        <div class="section-header">
+            <h2>{{ t()['nav_palettes'] }}</h2>
+            <p>{{ t()['palette_subtitle'] }}</p>
+        </div>
+
+        <!-- Palette type pills -->
+        <div id="paletteTypeSelector" class="palette-type-full">
+            @for (pt of paletteTypes; track pt.value) {
+            <button type="button"
+                class="type-btn"
+                [class.active]="paletteType() === pt.value"
+                (click)="setPaletteType(pt.value)">
+                {{ t()[pt.labelKey] }}
+            </button>
+            }
+        </div>
+
+        <!-- Large palette preview -->
+        <div class="palette-preview-large">
+            @for (color of palette(); track $index; let i = $index) {
+            <div class="palette-large-card" [style.background-color]="color.hex">
+                <div class="palette-large-info" [style.color]="textColorFor(color.hex)">
+                    <span class="palette-large-hex">{{ color.hex }}</span>
+                    <div class="palette-large-actions">
+                        <button type="button"
+                            class="palette-inline-btn"
+                            [style.color]="textColorFor(color.hex)"
+                            (click)="toggleLock(i)"
+                            [title]="color.locked ? t()['unlock'] : t()['lock']">
+                            {{ color.locked ? '🔒' : '🔓' }}
+                        </button>
+                        <button type="button"
+                            class="palette-inline-btn"
+                            [style.color]="textColorFor(color.hex)"
+                            (click)="copyColor(color.hex)"
+                            [title]="t()['copy']">
+                            ⧉
+                        </button>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <div class="palette-section-actions">
+            <button class="tool-button ai-button" (click)="generatePalette()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3a9 9 0 1 0 0 18h1.5a2.5 2.5 0 0 0 1.7-4.3
+                     1.5 1.5 0 0 1 1.1-2.7H18a3 3 0 0 0 3-3
+                     8 8 0 0 0-9-8Z" />
+                    <circle cx="7.5" cy="10" r="1" />
+                    <circle cx="10" cy="6.5" r="1" />
+                    <circle cx="15" cy="7" r="1" />
+                    <path d="m19 2 .7 2.3L22 5l-2.3.7L19 8l-.7-2.3L16 5l2.3-.7L19 2Z" />
+                </svg>
+                {{ t()['generate_palette'] }}
+            </button>
+            <button class="tool-button save-palette-btn" (click)="savePalette()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                    <polyline points="17 21 17 13 7 13 7 21" />
+                    <polyline points="7 3 7 8 15 8" />
+                </svg>
+                {{ t()['save_palette'] }}
+            </button>
+            <button class="tool-button" (click)="copyAllPalette()" [title]="t()['copy']">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="8" y="8" width="13" height="13" rx="2" />
+                    <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" />
+                </svg>
+                {{ t()['copy'] }} All
+            </button>
+        </div>
+    </div>
+    }
+
+    <!-- ════════════════ FAVORITES SECTION ════════════════ -->
+    @if (activeSection() === 'favorites') {
+    <div class="section-view">
+        <div class="section-header">
+            <h2>{{ t()['favorites'] }}</h2>
+            <p>{{ t()['saved_palettes_desc'] }}</p>
+        </div>
+
+        @if (savedPalettes().length === 0) {
+        <div class="empty-favorites">
+            <div class="empty-icon">♥</div>
+            <p>{{ t()['no_favorites'] }}</p>
+            <p class="empty-sub">{{ t()['no_saved_palettes'] }}</p>
+        </div>
+        } @else {
+        <div class="favorites-grid">
+            @for (saved of savedPalettes(); track saved.id) {
+            <div class="fav-card">
+                <div class="fav-colors">
+                    @for (hex of saved.colors; track $index) {
+                    <div class="fav-swatch" [style.background]="hex"
+                        [title]="hex"
+                        (click)="selectColor(hex)">
+                    </div>
+                    }
+                </div>
+                <div class="fav-card-body">
+                    <span class="fav-name">{{ saved.name }}</span>
+                    <div class="fav-hexes">
+                        @for (hex of saved.colors; track $index) {
+                        <span class="fav-hex-chip">{{ hex }}</span>
+                        }
+                    </div>
+                    <div class="fav-actions">
+                        <button type="button" class="tool-button fav-load-btn"
+                            (click)="restorePalette(saved)"
+                            [title]="t()['restore']">
+                            ↩ {{ t()['restore'] }}
+                        </button>
+                        <button type="button" class="tool-button fav-delete-btn"
+                            (click)="removeSaved(saved.id)"
+                            [title]="t()['delete']">
+                            ✕ {{ t()['delete'] }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        }
+    </div>
+    }
+
+    <!-- ════════════════ SETTINGS SECTION ════════════════ -->
+    @if (activeSection() === 'settings') {
+    <div class="section-view">
+        <div class="section-header">
+            <h2>{{ t()['settings'] }}</h2>
+        </div>
+
+        <div class="settings-card">
+            <div class="settings-row">
+                <label class="settings-label">{{ t()['theme'] }}</label>
+                <div class="settings-options">
+                    <button type="button"
+                        class="setting-opt-btn"
+                        [class.active]="theme() === 'light'"
+                        (click)="setTheme('light')">
+                        ☀️ {{ t()['light'] }}
+                    </button>
+                    <button type="button"
+                        class="setting-opt-btn"
+                        [class.active]="theme() === 'dark'"
+                        (click)="setTheme('dark')">
+                        🌙 {{ t()['dark'] }}
+                    </button>
+                </div>
+            </div>
+
+            <div class="settings-row">
+                <label class="settings-label">{{ t()['language'] }}</label>
+                <div class="settings-options">
+                    <button type="button"
+                        class="setting-opt-btn"
+                        [class.active]="state.language() === 'en'"
+                        (click)="state.setLanguage('en')">
+                        🇬🇧 English
+                    </button>
+                    <button type="button"
+                        class="setting-opt-btn"
+                        [class.active]="state.language() === 'mr'"
+                        (click)="state.setLanguage('mr')">
+                        🇮🇳 मराठी
+                    </button>
+                </div>
+            </div>
+
+            <div class="settings-row">
+                <label class="settings-label">{{ t()['palette_title'] }}</label>
+                <div class="settings-options">
+                    @for (pt of paletteTypes; track pt.value) {
+                    <button type="button"
+                        class="setting-opt-btn"
+                        [class.active]="paletteType() === pt.value"
+                        (click)="setPaletteType(pt.value)">
+                        {{ t()[pt.labelKey] }}
+                    </button>
+                    }
+                </div>
+            </div>
+
+            <hr class="settings-divider" />
+
+            <button type="button" class="tool-button reset-btn" (click)="resetSettings()">
+                {{ t()['reset_settings'] }}
+            </button>
+        </div>
+    </div>
+    }
+
+</div>
+
+<!-- Global Toast -->
+@if (state.toastMessage()) {
+<div class="kollo-toast" role="status" aria-live="polite">
+    {{ state.toastMessage() }}
+</div>
+}

@@ -1,0 +1,35 @@
+<header>
+    <div id="navbar">
+        <div id="one">
+            <img src="logo.png" alt="Kollo logo">
+            <h1>Kollo</h1>
+        </div>
+        <div id="two">
+            <div id="themeToggle">
+                <span class="sun"><img src="sun.png" alt="light mode"></span>
+
+                <button
+                    class="toggle"
+                    [class.toggled]="isDark()"
+                    (click)="toggleTheme()"
+                    [attr.aria-label]="isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
+                    [attr.aria-pressed]="isDark()"
+                    title="Toggle theme">
+                    <span class="toggle-circle"></span>
+                </button>
+
+                <span class="moon"><img src="moon.png" alt="dark mode"></span>
+            </div>
+
+            <div id="lang">
+                <select
+                    [value]="selectedLang()"
+                    (change)="onLanguageChange($event)"
+                    aria-label="Select language">
+                    <option value="en">English</option>
+                    <option value="mr">मराठी</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</header>

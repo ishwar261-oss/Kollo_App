@@ -1,0 +1,53 @@
+<div id="leftPanel">
+    <div id="selectColor">
+        <h3>{{ t()['selected_color'] }}</h3>
+        <div id="colorDot1" [style.background-color]="currentColor()">
+            <span>{{ currentColor() }}</span>
+        </div>
+        <div id="rgb">
+            <h3>RGB</h3>
+            <p>{{ rgbString() }}</p>
+        </div>
+        <div id="HSL">
+            <h3>HSL</h3>
+            <p>{{ hslString() }}</p>
+        </div>
+        <hr id='divider'>
+        <div id="continerOptions">
+            <button type="button" (click)="addToFavorites()">
+                <img src="heart.png" alt="">
+                <span>{{ t()['add_to_favorites'] }}</span>
+            </button>
+            <button type="button" (click)="generatePalette()">
+                <img src="magic.png" alt="">
+                <span>{{ t()['generate_palette_action'] }}</span>
+            </button>
+            <button type="button" (click)="viewFavorites()">
+                <img src="heart.png" alt="">
+                <span>{{ t()['view_favorites'] }}</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="QuickActions">
+        <h3>{{ t()['quick_actions'] }}</h3>
+        <div id="actionsContiner">
+            <button type="button" (click)="generatePalette()">
+                <img src="magic.png" alt="">
+                <span>{{ t()['generate_palette_action'] }}</span>
+            </button>
+            <button type="button" (click)="viewFavorites()">
+                <img src="heart.png" alt="">
+                <span>{{ t()['view_favorites'] }}</span>
+            </button>
+            <button type="button" (click)="toggleTheme()">
+                <img src="moon.png" alt="">
+                <span>{{ t()['light_dark_mode'] }}</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="leftPanelImg">
+        <img src="image.png" alt="Decorative color art">
+    </div>
+</div>

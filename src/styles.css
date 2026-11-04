@@ -1,0 +1,97 @@
+/* ─── Google Font ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ─── CSS custom properties (light theme = default) ─────────────────────── */
+:root,
+[data-theme="light"] {
+  --bg-page:       #F1F5F9;
+  --bg-card:       #FFFFFF;
+  --bg-card-hover: #FAFBFF;
+  --bg-sidebar:    #EFF6FF;
+  --bg-navbar:     #FFFFFF;
+  --border:        #E8EDF7;
+  --border-focus:  #6366F1;
+  --text-primary:  #0F172A;
+  --text-secondary:#64748B;
+  --text-muted:    #94A3B8;
+  --accent:        #6366F1;
+  --accent-hover:  #4F46E5;
+  --accent-light:  #EEF2FF;
+  --shadow-sm:     0 1px 3px rgba(0,0,0,.06);
+  --shadow-md:     0 4px 12px rgba(0,0,0,.08);
+  --shadow-card:   0 1px 2px rgba(255,255,255,.9) inset, 0 3px 10px rgba(30,41,59,.04);
+  --toggle-bg:     #1e293b;
+  --input-bg:      #FFFFFF;
+  --menu-active-bg:#EEF2FF;
+  --menu-active-color: #6366F1;
+  --lock-bg:       #FFFFFF;
+  --hex-btn-bg:    transparent;
+}
+
+[data-theme="dark"] {
+  --bg-page:       #0F172A;
+  --bg-card:       #1E293B;
+  --bg-card-hover: #263347;
+  --bg-sidebar:    #162032;
+  --bg-navbar:     #1E293B;
+  --border:        #334155;
+  --border-focus:  #818CF8;
+  --text-primary:  #F1F5F9;
+  --text-secondary:#94A3B8;
+  --text-muted:    #64748B;
+  --accent:        #818CF8;
+  --accent-hover:  #6366F1;
+  --accent-light:  #1E1B4B;
+  --shadow-sm:     0 1px 3px rgba(0,0,0,.3);
+  --shadow-md:     0 4px 12px rgba(0,0,0,.4);
+  --shadow-card:   0 1px 2px rgba(255,255,255,.04) inset, 0 3px 10px rgba(0,0,0,.3);
+  --toggle-bg:     #6366F1;
+  --input-bg:      #0F172A;
+  --menu-active-bg:#1E1B4B;
+  --menu-active-color: #818CF8;
+  --lock-bg:       #1E293B;
+  --hex-btn-bg:    transparent;
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ─── Global toast ───────────────────────────────────────────────────────── */
+.kollo-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  background: #1E293B;
+  color: #F1F5F9;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+  z-index: 9999;
+  white-space: nowrap;
+  animation: toast-in 0.25s ease;
+}
+
+[data-theme="dark"] .kollo-toast {
+  background: #334155;
+  color: #F8FAFC;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}

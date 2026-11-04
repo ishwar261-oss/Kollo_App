@@ -1,0 +1,5 @@
+/* App-level layout styles — scoped to the root component */
+
+:host {
+  display: block;
+}
